@@ -6,6 +6,7 @@
 
 - link:
     ~/.dotfiles-dotbot: ''
+    ~/.alias:
     ~/.zlogin:
     ~/.zprofile:
     ~/.zsh_favlist:
