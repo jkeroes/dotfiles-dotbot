@@ -1,0 +1,17 @@
+- defaults:
+    link:
+      relink: true
+
+- clean: ['~']
+
+- link:
+    ~/.dotfiles-dotbot: ''
+    ~/.zlogin:
+    ~/.zprofile:
+    ~/.zsh_favlist:
+    ~/.zshenv:
+    ~/.zshfunc:
+    ~/.zshrc:
+
+- shell:
+  - [git submodule update --init --recursive, Installing submodules]
