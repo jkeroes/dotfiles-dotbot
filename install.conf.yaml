@@ -6,6 +6,8 @@
 
 - link:
     ~/.dotfiles-dotbot: ''
+    ~/.config:
+        create: true
     ~/.alias:
     ~/.gitconfig:
     ~/.zlogin:
