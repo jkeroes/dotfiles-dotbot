@@ -8,6 +8,8 @@
     ~/.dotfiles-dotbot: ''
     ~/.config:
         create: true
+    ~/.oh-my-zsh/custom/themes/spaceship-prompt:
+        path: config/spaceship-prompt
     ~/.alias:
     ~/.gitconfig:
     ~/.zlogin:
