@@ -1,0 +1,59 @@
+ForwardAgent yes
+#VisualHostKey yes
+HashKnownHosts no
+#ConnectTimeout 2
+
+# My Hosts
+Host github github.com
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/id_github_ed
+    IdentitiesOnly yes
+
+# These will only work if you fully qualify the domain name.
+Host *.dreamhost.com *.sd.dreamhost.com *.newdream.net
+    IdentityFile ~/.ssh/id_dh_ed
+    IdentityFile ~/.ssh/id_dh
+
+# Shortcut names for dc-asparagus and dc-wtf
+Host beanie bumpo plotz porky rita runt skippy slappy snowball yakko snafu tarfu
+    IdentityFile ~/.ssh/id_dh_ed
+    IdentityFile ~/.ssh/id_dh
+
+Host git.newdream.net
+    HostName git.newdream.net
+    KexAlgorithms +diffie-hellman-group1-sha1
+    IdentityFile ~/.ssh/id_dh_ed
+    Port 29418
+
+Host josker16 josker.dreamhosters.com
+    Hostname josker16.dreamhosters.com
+    User josker16
+
+Host cloud cloud.keroes.com
+    HostName cloud.keroes.com
+    User dhc-user
+    # failing:
+    IdentityFile ~/.ssh/id_dh_ed
+
+Host fallendevil.com keroes.com
+    User jkeroes2
+
+Host bow
+    User admin
+
+Host gw
+    User root
+    IdentityFile ~/.ssh/id_home_rsa
+
+# Default
+Host *
+    User jkeroes
+    IdentityFile ~/.ssh/id_home_ed
+    StrictHostKeyChecking ask
+    ServerAliveInterval 60
+    ServerAliveCountMax 6
+    KeepAlive yes
+    #ControlMaster auto
+    #ControlPath ~/.ssh/master/%r@%h:%p
+    #ControlPersist 8h

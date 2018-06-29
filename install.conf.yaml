@@ -8,6 +8,9 @@
     ~/.dotfiles-dotbot: ''
     ~/.config:
         create: true
+    ~/.ssh:
+        create: true
+    ~/.ssh/config:
     ~/.alias:
     ~/.gitconfig:
     ~/.oh-my-zsh:
