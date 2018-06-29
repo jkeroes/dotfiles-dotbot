@@ -5,18 +5,27 @@
 - clean: ['~']
 
 - link:
+    # dotbot
     ~/.dotfiles-dotbot: ''
+
+    # misc
     ~/.config:
-        create: true
+        create: true # dir
+
+    # ssh
     ~/.ssh:
-        create: true
+        create: true # dir
     ~/.ssh/config:
-    ~/.alias:
+
+    # git
     ~/.gitconfig:
     ~/.tigrc:
-    ~/.oh-my-zsh:
+
+    # zsh
+    ~/.oh-my-zsh: # dir
     ~/.oh-my-zsh/custom/themes/spaceship.zsh-theme:
         path: config/spaceship-prompt/spaceship.zsh-theme
+    ~/.alias:
     ~/.zlogin:
     ~/.zprofile:
     ~/.zsh_favlist:
