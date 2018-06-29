@@ -8,14 +8,11 @@
     # dotbot
     ~/.dotfiles-dotbot: ''
 
-    # misc
+    # misc and git submodules
     ~/.config:
-        create: true # dir
 
     # ssh
     ~/.ssh:
-        create: true # dir
-    ~/.ssh/config:
 
     # git
     ~/.gitconfig:
