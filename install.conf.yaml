@@ -24,5 +24,8 @@
     ~/.zshfunc:
     ~/.zshrc:
 
+    # perl
+    ~/.perltidyrc:
+
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
