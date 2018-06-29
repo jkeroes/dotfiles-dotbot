@@ -33,6 +33,9 @@
     # perl
     ~/.perltidyrc:
 
+    # python
+    ~/.pythonrc:
+
     # tmux
     ~/.tmux.conf:
         path: config/tmux/.tmux.conf
