@@ -42,5 +42,10 @@
     ~/.tmux.conf.local:
         path: config/tmux/.tmux.conf.local
 
+    # databases
+    ~/.my.cnf:
+    ~/.psqlrc:
+    ~/.sqliterc:
+
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
