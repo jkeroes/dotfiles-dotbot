@@ -8,7 +8,7 @@
     # dotbot
     ~/.dotfiles-dotbot: ''
 
-    # misc and git submodules
+    # git submodules and misc
     ~/.config:
 
     # ssh
@@ -35,6 +35,7 @@
 
     # python
     ~/.pythonrc:
+    ~/.inputrc:
 
     # tmux
     ~/.tmux.conf:
@@ -46,6 +47,7 @@
     ~/.my.cnf:
     ~/.psqlrc:
     ~/.sqliterc:
+    ~/.inputrc:
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
