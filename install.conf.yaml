@@ -13,6 +13,7 @@
     ~/.ssh/config:
     ~/.alias:
     ~/.gitconfig:
+    ~/.tigrc:
     ~/.oh-my-zsh:
     ~/.oh-my-zsh/custom/themes/spaceship.zsh-theme:
         path: config/spaceship-prompt/spaceship.zsh-theme
