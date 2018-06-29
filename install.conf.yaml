@@ -48,7 +48,7 @@
     ~/.my.cnf:
     ~/.psqlrc:
     ~/.sqliterc:
-    ~/.inputrc:
+    ~/.editrc:
 
     # misc
     ~/.rsync-exclude:
