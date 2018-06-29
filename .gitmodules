@@ -10,3 +10,6 @@
 [submodule "config/spaceship-prompt"]
 	path = config/spaceship-prompt
 	url = https://github.com/denysdovhan/spaceship-prompt.git
+[submodule "config/tmux"]
+	path = config/tmux
+	url = https://github.com/gpakosz/.tmux.git
