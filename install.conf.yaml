@@ -21,7 +21,7 @@
     # zsh
     ~/.oh-my-zsh: # dir
     ~/.oh-my-zsh/custom/themes/spaceship.zsh-theme:
-        path: config/spaceship-prompt/spaceship.zsh-theme
+        path: spaceship-prompt/spaceship.zsh-theme
     ~/.alias:
     ~/.hushlogin:
     ~/.zlogin:
@@ -40,9 +40,9 @@
 
     # tmux
     ~/.tmux.conf:
-        path: config/tmux/.tmux.conf
+        path: tmux/.tmux.conf
     ~/.tmux.conf.local:
-        path: config/tmux/.tmux.conf.local
+        path: tmux/.tmux.conf.local
 
     # databases
     ~/.my.cnf:
