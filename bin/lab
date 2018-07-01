@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+TOKEN=$(cat ~/.gitlab_token)
+ENDPOINT=$1; shift
+#QUERY=$1; shift
+
+curl -s -H "Private-Token: $TOKEN" "https://git.dreamhost.com/api/v4/$ENDPOINT" $@
+#| jq $QUERY

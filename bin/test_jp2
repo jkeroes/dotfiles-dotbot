@@ -1,0 +1,39 @@
+#!/usr/bin/env perl
+
+use 5.010;
+use strict;
+use warnings;
+use YAML;
+use Ndn::Dreamhost::DreamPress::Instance;
+
+my $dom = "jkeroes-2018-02-21.dream.press";
+my $DPI = Ndn::Dreamhost::DreamPress::Instance->new(Domain => $dom);
+say "Resetting all JP params...";
+$DPI->Install->delete_param('JPS_state');
+$DPI->Install->delete_param('JPS_token');
+$DPI->Install->delete_param('JPS_token_json_data');
+$DPI->Install->Update;
+my $jp_params = $DPI->Install->param_hash;
+die "JP params are still defined!" if keys %$jp_params;
+
+# Start JP connection and create JPS_state.
+say 'pre-start() jetpack_status: ' . $DPI->jetpack_status;
+my $start_resp = $DPI->start_enable_jetpack();
+say "\nInstall: " . YAML::Dump($DPI->Install->param_hash);
+say 'post-start() jetpack_status: ' . $DPI->jetpack_status;
+say "state is defined" if $DPI->Install->param_default('JPS_state');
+die "state should exist now but doesn't." unless $DPI->JP->has_valid_state;
+
+say "Open URL and authorize: $start_resp->{authorization_url}";
+print "Enter code: ";
+chomp(my $code = <STDIN>);
+die "Need a code!" unless $code;
+
+say "\nInstall: " . YAML::Dump($DPI->Install->param_hash);
+
+# Finish JP connection
+my $finish_resp = $DPI->finish_enable_jetpack($code);
+say "\nFinish: " . YAML::Dump($finish_resp);
+say "\nInstall: " . YAML::Dump($DPI->Install->param_hash);
+say 'jetpack_status: ' . $DPI->jetpack_status;
+say "done";

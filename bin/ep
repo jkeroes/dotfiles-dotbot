@@ -1,0 +1,192 @@
+#!/opt/local/bin/perl
+#
+# Run ep --help for help.
+#
+# (C) 2009 Joshua Keroes.
+# This is licensed under the Artistic License, just like Perl. 
+# Google and email me if you like this code.
+#
+# Changelog:
+#   0.1 - initial release
+#   0.2 - accept full file paths
+#   0.3 - use caching if available
+#   0.4 - use http://imdbapi.poromenos.org instead of http://epguides.com
+#   0.5 - don't be such a drama queen and die at every last little thing
+
+use strict;
+use warnings;
+use File::Basename;
+use Getopt::Long;
+use JSON;
+use LWP::Simple;
+
+# Use Caching if the module is installed
+eval { require Cache::FileCache };
+warn "Please install Cache::FileCache from CPAN. Continuing without...\n\n" if $@;
+
+our $VERSION = '0.5';
+
+our %TRANS = (
+	qr[Penn.*Teller:?.Bullshit] => 'penn%teller%',
+	qr[The.Simpsons]i => 'the+simpsons',
+# 	qr[Sanctuary.US]i => 'tt0965394', # doesn't work
+ 	qr[Sanctuary.US]i => 'Sanctuary', # doesn't work
+);
+
+my %opt; GetOptions(\%opt, qw[verbose rename help]);
+
+if ($opt{help} or !@ARGV) {
+	print usage();
+	exit 1;
+}
+
+my $cache = Cache::FileCache->can('new') && Cache::FileCache->new;
+
+for my $path (@ARGV) {
+	my $dir      = dirname($path);
+	my $file     = basename($path);
+	my %info     = parse_file($file) or warn "Can't parse $file", next;
+	my $json     = get_content($info{imdb}) or warn "Can't find episodes for $info{imdb}", next;
+	die "Can't find episodes for $info{imdb}" if $json eq "null";
+	my $content  = JSON->new->decode($json)  or warn "Can't decode JSON for $info{imdb}", next;
+	my $title    = get_title(\%info, $content);
+	my $newtitle = "$info{show} $info{season}$info{epnum} - $title.$info{ext}";
+#	my $newtitle = "$info{show} $info{season}$info{epnum} - $title";
+	my $newpath  = "$dir/$newtitle";
+	
+	if ($opt{rename}) {
+		if (rename $path, $newpath) {
+			print "Renamed $path to $newpath\n";
+		}
+		else {
+			print "Couldn't rename $path: $!\n";
+		}
+	}
+	else {
+		print "$newpath\n";
+	}
+}
+
+exit;
+
+# ========
+# = Subs =
+# ========
+
+# Returns JSON
+sub get_content {
+	my $imdb = shift or die "get_content(imdb) called without args";
+	
+	if ($cache) {
+		if (my $cached = $cache->get($imdb)) {
+			return $cached;
+		}
+		else {
+			my $json = get("http://imdbapi.poromenos.org/js/?name=$imdb") 
+				or warn "Can't fetch http://imdbapi.poromenos.org/js/?name=$imdb";
+			$cache->set($imdb, $json, 86400); # expires in one day
+			return $json;
+		}
+	}
+	else {
+		return get("http://imdbapi.poromenos.org/js/?name=$imdb") 
+			or warn "Can't fetch http://imdbapi.poromenos.org/js/?name=$imdb";
+	}
+}
+
+sub parse_file {
+	my $file = shift or die "No show to parse";
+	
+	my ($show, $season, $epnum, $ext) = $file =~ m{
+		^(.*?)
+		[sS]?(\d?\d) 
+		[eExX]?(\d\d)
+		.*
+		\.(\w+)$
+	}x;
+	return unless $show;
+	
+	$show =~ s/^\[ [^]]+ \]\s?//gx;
+	$show =~ s/[^a-zA-Z0-9 ]/ /g;
+	$show =~ s/ +$//;
+	$show =~ s/  +/ /g;
+	$show = join " ", map { ucfirst } split " ", $show;
+		
+	$season =~ s/^0+//;
+	
+	(my $imdb = $show) =~ s/ /+/g;
+	# my $imdb = $show;
+	# $imdb =~ s/^The//;
+
+	# Translation table to IMDB-safe names.
+	while ( my ($re, $name) = each %TRANS) {
+		if ($imdb =~ $re) {
+			$imdb = $name;
+			last;
+		}
+	}
+
+	my $epcode = epcode($season, $epnum);
+
+	print "imdb='$imdb'\nshow='$show'\nseason='$season'\nepnum='$epnum'\nepcode='$epcode'\n" if $opt{verbose};
+
+	return ( 
+		show   => $show, 
+		imdb   => $imdb, # searchable show name in IMDB
+		season => $season, 
+		epnum  => $epnum,
+		epcode => $epcode,
+		ext    => $ext,
+	);
+}
+
+sub get_title {
+	my ($info, $content) = @_ or die "No webpage content to parse";
+	
+	die "No season" unless $info->{season};
+	die "No episode number" unless $info->{epnum};
+	
+	my ($actual_imdb_title) = keys %$content;
+	
+	my $aref = $content->{$actual_imdb_title}{episodes} or warn "Can't find episode list in JSON", return;
+	my ($href) = grep { $_->{season} == $info->{season} and $_->{number} == $info->{epnum} and $_ } @$aref;
+	my $title = $href->{name};
+	unless ($title) {
+		warn "Can't find title in JSON";
+		return;
+	}
+	
+	$title =~ s{"}{}g;
+	$title =~ s{[:'/\\]}{-}g;  # Replace naughty characters that might cause trouble with the FS
+	
+	print "title=$title\n" if $opt{verbose};
+	
+	return $title;
+}
+
+sub epcode {
+	my ($season, $epnum) = @_;
+	
+	$season =~ s/^0//;
+	$epnum  =~ s/^0//;
+	
+	my $epcode = sprintf "%d-%02d", $season, $epnum;
+	$epcode =~ s/-0/-[0 ]/;
+	return qr[$epcode];
+}
+
+sub usage {
+	my $cf_installed = defined $Cache::FileCache::VERSION
+		? "Using Cache::FileCache-$Cache::FileCache::VERSION"
+		: "Cache::FileCache not installed";
+	
+	return <<EOB;
+$0 [--options] file [files ...]
+	-r|--rename   - rename the file
+	-v|--verbose  - run verbosely
+	-h|--help     - display this help
+
+	$cf_installed
+
+EOB
+}

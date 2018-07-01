@@ -1,0 +1,14 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+epcode	ep	167;"	s
+get_content	ep	77;"	s
+get_title	ep	143;"	s
+lab	mrs	10;"	s
+parse_file	ep	97;"	s
+show	mrs	21;"	s
+since	mrs	15;"	s
+usage	ep	178;"	s

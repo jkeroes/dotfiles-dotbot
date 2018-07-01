@@ -1,0 +1,75 @@
+#!/usr/bin/env perl
+use strict;
+use warnings;
+use JSON;
+use DateTime;
+use DateTime::Format::ISO8601;
+use List::MoreUtils qw{part};
+use feature qw{say};
+
+sub lab {
+	my $path = sprintf( shift, @_ );
+	my $data = from_json( qx{~/bin/lab '$path'} );
+	return ref $data eq 'ARRAY' ? @$data : $data; # assume hash
+}
+sub since {
+	my $date = shift;
+	my $DT   = DateTime::Format::ISO8601->parse_datetime( $date );
+	return DateTime->now()->delta_days( $DT )->days;
+}
+
+sub show {
+	for my $MR (@_){
+		my @notes = grep{!$_->{system}} lab(
+			'/projects/%d/merge_requests/%d/notes?order_by=updated_at',
+			$MR->{target_project_id},
+			$MR->{iid},
+		);
+		my @approvals = grep{ $_->{approvals_left} == 0 } lab(
+			'/projects/%d/merge_requests/%d/approvals',
+			$MR->{target_project_id},
+			$MR->{iid},
+		);
+		my ($pipeline) = lab(
+			'/projects/%d/merge_requests/%d/pipelines',
+			$MR->{target_project_id},
+			$MR->{iid},
+		);
+		my $pipe_status =
+			  $pipeline->{status} eq 'success' ? ' '
+			: $pipeline->{status} eq 'failed'  ? 'X'
+			: $pipeline->{status} eq 'running' ? '<'
+			:                                    '?';
+
+		printf qq{[%s%s %s:%s:%s] %s  %s\n},
+			@approvals ? '+' : ' ',
+			$pipe_status,
+			since($MR->{created_at}),
+			since($MR->{updated_at}),
+			@notes ? since($notes[0]->{updated_at}) : ' ',
+
+			$MR->{web_url},
+			$MR->{title},
+		;
+			#@notes && @notes > 0 ? scalar(@notes) : ' ',
+	}
+}
+
+my @who = @ARGV || (
+	45
+	#10 => 'ben hengst',
+	# 45 => 'Joshua Keroes',
+	#53 => 'Matthew Wodrich',
+);
+
+while (my ($id,$name) = splice @who, 0, 2){
+	my @MRs = lab('/projects/8/merge_requests?author_id=%d&state=opened', $id);
+	my ($non_wip,$wip) = part { $_->{title} =~ m/^WIP\b/ } @MRs;
+	my $count = scalar @MRs;
+	say qq{\n[ $name : $count ]} if $name;
+
+	show( @$non_wip )
+		if $non_wip;
+	show( @$wip )
+		if $wip;
+}

@@ -1,0 +1,28 @@
+#!/usr/bin/perl
+
+use 5.018;
+use strict;
+use warnings;
+use File::Basename;
+
+for my $old (@ARGV) {
+	my $new = basename($old);
+	$new =~ s/.\w+$/.m4v/;    # change ext
+	$new =~ s{ \(.*\)}{};     # delete video encoding
+	$new =~ s/[_!]//g;
+	$new =~ s/  / /g;
+	$new =~ s/ ,/,/g;
+	$new = ucfirst(lc($new));
+
+	my $q_old = quotemeta $old;
+	my $q_new = quotemeta $new;
+	my $cmd = "HandBrakeCLI -Z'General/Roku 720p30 Surround' -i $q_old -o $q_new";
+	say "Running $cmd...";
+	system $cmd;
+
+	if ($?) {
+		die "$new transcode failed ($?)";
+	} else {
+		rename $old, ".done/$old" or warn "Can't move $old to .done/: $!";
+	}
+}

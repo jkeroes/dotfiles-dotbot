@@ -1,0 +1,33 @@
+#!/usr/bin/env perl
+
+use 5.010;
+use List::Util qw/max/;
+
+# sorts by the full timestamp but display only the date.
+#
+my @refs = `git for-each-ref --sort='-committerdate:iso8601' --format=' %(committerdate:short)%09%(refname)' refs/heads`;
+
+my @output;
+
+my $branch_length = 10;
+for (@refs) {
+	chomp;
+	next if /origin|HEAD/;
+	
+	# make the ref look like a branch
+	s{refs/heads/}{};
+
+	my ($date, $branch) = split /\t/;
+
+	# Get the latest commit-message title
+	my $cmd = "git log $branch\^..$branch --pretty='%s'";
+	my ($title) = `$cmd`;
+
+	$branch_length = max length $branch, $branch_length;
+
+	push @output, [$date, $branch, $title];
+}
+
+for (@output) {
+	printf "%-12s %-${branch_length}s  %s", @$_;
+}

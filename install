@@ -2,14 +2,24 @@
 
 set -e
 
-CONFIG="install.conf.yaml"
+CONFIG_SUFFIX=".yaml"
 DOTBOT_DIR="dotbot"
-
 DOTBOT_BIN="bin/dotbot"
+
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+CONFDIR="$BASEDIR/meta/profiles"
+INDEX_CONFIG_PREFIX="index"
+INDEX_CONFIG="${CONFDIR}/${INDEX_CONFIG_PREFIX}${CONFIG_SUFFIX}"
 
 cd "${BASEDIR}"
 git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
 git submodule update --init --recursive "${DOTBOT_DIR}"
 
-"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" "${@}"
+# Always run the index config
+"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${INDEX_CONFIG}" "${@}"
+
+# If a machine config exists, run it too.
+HOSTNAME=$(/bin/hostname -s)
+HOSTCONFIG="${CONFDIR}/${HOSTNAME}${CONFIG_SUFFIX}"
+test -e $HOSTCONFIG && \
+    "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${HOSTCONFIG}" "${@}"

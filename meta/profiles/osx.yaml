@@ -1,0 +1,5 @@
+- link:
+    ~/bin:
+        path: bin-home
+        relink: true
+        force: true
