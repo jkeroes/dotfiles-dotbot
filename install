@@ -21,5 +21,8 @@ git submodule update --init --recursive "${DOTBOT_DIR}"
 # If a machine config exists, run it too.
 HOSTNAME=$(/bin/hostname -s)
 HOSTCONFIG="${CONFDIR}/${HOSTNAME}${CONFIG_SUFFIX}"
+
+# dotbot-brewfile grants profiles the ability to use the brewfile plugin code.
+# It's up to the profile to run or not run the [slow] bundle install and updates.
 test -e $HOSTCONFIG && \
-    "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${HOSTCONFIG}" "${@}"
+    "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" --plugin-dir dotbot-brewfile -c "${HOSTCONFIG}" "${@}"

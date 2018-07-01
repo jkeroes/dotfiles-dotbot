@@ -3,3 +3,8 @@
         path: bin-home
         relink: true
         force: true
+
+# Run brew (slow)
+# - brewfile:
+#     file: Brewfile
+#     no-upgrade: true
