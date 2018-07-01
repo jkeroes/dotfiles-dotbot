@@ -51,7 +51,7 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 [ -n "$PS1" ] \
 	&& [ -s $BASE16_SHELL/profile_helper.sh ] \
 	&& eval "$($BASE16_SHELL/profile_helper.sh)" \
-	&& source ~/.config/base16-shell/scripts/base16-monokai.sh
+	&& source "$BASE16_SHELL/scripts/base16-monokai.sh"
 
 # @work, $lastdir would be better but most of the time, this is good enough
 test -d /ndn && cd ~/ndn
