@@ -96,9 +96,9 @@
     ra  = rebase --abort
     rc  = rebase --continue
     ri  = rebase --interactive --autosquash
-    ria   = -c core.editor=/bin/true -c sequence.editor=/bin/true rebase --interactive --autosquash
+    ria   = -c core.editor=true -c sequence.editor=true rebase --interactive --autosquash
     # rir   = rebase --interactive --autosquash --root
-    # rira  = -c core.editor=/bin/true -c sequence.editor=/bin/true rebase --interactive --autosquash --root
+    # rira  = -c core.editor=true -c sequence.editor=true rebase --interactive --autosquash --root
     rs  = rebase --skip
     rom = rebase origin/master
 
