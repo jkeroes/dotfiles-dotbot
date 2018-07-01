@@ -50,6 +50,10 @@
     ~/.sqliterc:
     ~/.editrc:
 
+    # vim
+    ~/.vim:
+    ~/.vimrc:
+
     # misc
     ~/.ackrc:
     ~/.rsync-exclude:
