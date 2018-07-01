@@ -10,3 +10,15 @@
 [submodule "dotbot-brewfile"]
 	path = dotbot-brewfile
 	url = https://github.com/sobolevn/dotbot-brewfile.git
+[submodule "vim/plugged/nerdtree"]
+	path = vim/plugged/nerdtree
+	url = https://github.com/scrooloose/nerdtree.git
+[submodule "vim/plugged/vim-fugitive"]
+	path = vim/plugged/vim-fugitive
+	url = https://github.com/tpope/vim-fugitive.git
+[submodule "vim/plugged/vim-github-dashboard"]
+	path = vim/plugged/vim-github-dashboard
+	url = https://github.com/junegunn/vim-github-dashboard.git
+[submodule "vim/plugged/vim-sensible"]
+	path = vim/plugged/vim-sensible
+	url = https://github.com/tpope/vim-sensible.git
