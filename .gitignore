@@ -3,3 +3,4 @@ ssh/id*
 ssh/old
 ssh/authorized_keys
 ssh/known_hosts
+ssh/agent*
