@@ -51,6 +51,7 @@
     ~/.editrc:
 
     # misc
+    ~/.ackrc:
     ~/.rsync-exclude:
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
