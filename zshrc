@@ -18,7 +18,7 @@ plugins+=(docker docker-compose vagrant)
 # remote
 plugins+=(ssh-agent mosh tmux tmuxinator)
 zstyle :omz:plugins:ssh-agent agent-forwarding on
-zstyle :omz:plugins:ssh-agent identities dreamhost home-rsa github
+zstyle :omz:plugins:ssh-agent identities id_dh_rsa id_dh_ed id_github_ed id_home_ed id_home_rsa id_ms_ed
 
 # others
 # plugins+=(python pip pep8)
