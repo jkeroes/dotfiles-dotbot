@@ -26,7 +26,9 @@ alias grbr='for branch in `git branch -r | grep -v HEAD`;do echo -e `git show --
 ## More commit aliases!
 alias gcm="git commit -m"
 alias gcam="git commit -a -m"
-alias 'gcm!'="git commit --amend -m"
+alias 'gcm!'="git commit -m --amend"
+
+alias gls='git pull && git submodule update --recursive'
 
 # OMZ commit alias quickref:
 # 'gc!'   ='git commit -v    --amend'
