@@ -1,8 +1,13 @@
+- defaults:
+    link:
+      relink: true
+
 - link:
     ~/bin:
         path: bin-home
-        relink: true
         force: true
+    ~/.iterm2:
+    ~/.iterm2_shell_integration.zsh:
 
 # Run brew (slow)
 # - brewfile:
