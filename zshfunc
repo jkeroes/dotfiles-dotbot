@@ -1,10 +1,44 @@
+## Git aliases
+
 gg()   { git grep -E $* }
 ggt()  { gg -i $* -- '*.t' }
 ggtp() { gg -i $* -- '*.tp' }
 ggm()  { gg -i $* -- '*.pm' }
 ggp()  { gg -i $* -- '*.pm' '*.t' '*.pl' 'bin/' }
-ggs()  { gg -i "sub.*$*" -- '*.pm' '*.t' '*.pl' 'bin/' }
+ggs()  { gg -i "(has|sub).*$*" -- '*.pm' '*.t' '*.pl' 'bin/' }
+
+# see also: gca!
 gcaa() { gca --amend }
+
+is_dirty()     { [[ $(git diff -q) ]] && echo "1" }
+branch_name()  { git symbolic-ref --short HEAD 2>/dev/null }
+is_detached()  { [[ $(branch_name) ]] || echo "1" }
+is_on_master() { [[ $(branch_name) == 'master' ]] && echo "1" }
+
+# Usage: gria [COMMIT_ID]  # defaults to the merge-base commit-id
+#
+# Integrates fixup commits back to a provided COMMIT_ID
+# without pausing to edit a commit-msg or back to the
+# merge-base.
+#
+# See also: the`git fixup` alias.
+gria() {
+    local is_dirty=$(is_dirty)
+    local is_detached=$(is_detached)
+    local commit_id="$1"
+    [[ $commit_id ]] || commit_id=$(git merge-base HEAD master)
+
+    if [[ $is_detached ]]; then
+        >&2 echo "Refusing to rebase from detached HEAD"
+    else
+        [[ $is_dirty ]] && git stash
+        git -c core.editor=true -c sequence.editor=true rebase --interactive --autosquash $commit_id
+        [[ $is_dirty ]] && git stash pop
+    fi
+}
+
+## System aliases
+
 syslocate() { locate $* | grep -vE '^/home|^/root' }
 
 # work
