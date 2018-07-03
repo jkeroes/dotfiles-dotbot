@@ -53,6 +53,7 @@
     # vim
     ~/.vim:
     ~/.vimrc:
+    ~/.vimrc_background:
 
     # misc
     ~/.ackrc:
