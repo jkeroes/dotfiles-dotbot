@@ -28,6 +28,8 @@ alias gcm="git commit -m"
 alias gcam="git commit -a -m"
 alias 'gcm!'="git commit -m --amend"
 
+alias gpf='git push --force'
+alias 'gp!'='git push --force'
 alias gls='git pull && git submodule update --recursive'
 
 # OMZ commit alias quickref:
