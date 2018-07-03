@@ -43,7 +43,10 @@ alias r='git review && rvs'
 
 ## thinkos and typos
 alias more=less
-alias 'pkill -fl'='pkill -f'
+
+# Check for results after running pkill
+alias 'pkill -fl'='pkill -l $*; sleep 1; pgrep -fl $*'
+alias 'pkill -l'='pkill $*; sleep 1; pgrep $*'
 
 # just beep my phone when something's ready
 alias pushdone='pushbullet push i8 note done'
