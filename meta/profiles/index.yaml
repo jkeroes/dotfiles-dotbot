@@ -57,6 +57,7 @@
 
     # misc
     ~/.ackrc:
+    ~/.curlrc:
     ~/.rsync-exclude:
     ~/.wgetrc:
 
