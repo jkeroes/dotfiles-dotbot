@@ -55,6 +55,10 @@ alias 'pkill -l'='pkill $*; sleep 1; pgrep $*'
 # just beep my phone when something's ready
 alias pushdone='pushbullet push i8 note done'
 
+# misc
+alias sha1='openssl sha1'
+alias fastping='ping -c 100 -i .2'
+
 # work
 if [ -d /ndn ]; then
 	# $DEV_ENV is defined in .zshenv
