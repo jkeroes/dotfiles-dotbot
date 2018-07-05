@@ -121,6 +121,7 @@
 
     # index
     st = status
+    stn = status         # typo
     a  = add
     ia = add
     ir = reset
