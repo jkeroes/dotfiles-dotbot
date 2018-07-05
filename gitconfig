@@ -158,6 +158,19 @@
     fixup  = !sh -c 'git commit --no-gpg-sign -m  \"fixup! $(git log -1 --format='\\''%s'\\'' $@ | sed -e '\\''s/^fixup! //'\\'')\"' -
     squash = !sh -c 'git commit --no-gpg-sign -m \"squash! $(git log -1 --format='\\''%s'\\'' $@ | sed -e '\\''s/^squash! //'\\'')\"' -
 
+    # `git fresh` takes a messy, mergey old branch and rebases it on top of
+    # origin/master, all spiffed up.
+    rebr = !git checkout master && git pull && git checkout -b
+    reup = !git fetch && git merge remotes/origin/master
+    fresh  = !git stash \
+        && git reup \
+        && rm -f /tmp/patch \
+        && git diff --patch master > /tmp/patch \
+        && git rebr "$(git rev-parse --abbrev-ref HEAD).fresh" \
+        && git apply /tmp/patch \
+        && git stash pop \
+        && rm /tmp/patch
+
     # http://gggritso.com/human-git-aliases
     branches  = branch -a
     tags      = tag
