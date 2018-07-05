@@ -5,3 +5,4 @@ ssh/authorized_keys
 ssh/known_hosts
 ssh/agent*
 vim/.netrwhist
+vim/plugged

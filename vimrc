@@ -6,8 +6,11 @@ Plug 'tpope/vim-fugitive'
 Plug 'chriskempson/base16-vim'
 call plug#end()
 
-let base16colorspace=256
-colorscheme base16-onedark
+if exists("g:base16_shell_path")
+    let base16colorspace=256
+    colorscheme base16-onedark
+endif
+
 set mouse=a
 set tabstop=4
 set shiftwidth=4
