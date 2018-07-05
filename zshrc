@@ -35,11 +35,8 @@ plugins+=(zsh-autosuggestions)
 
 
 # @work
-test -d /ndn/etc && source /ndn/etc/ndnperl.rc
-
-# perl
-## use envperl
-test -d /opt/ndn-perl/jkeroes && ndnperl user
+test -d /ndn/etc && source /ndn/etc/ndnperl.rc \
+    && test -d /opt/ndn-perl/jkeroes && ndnperl user
 
 ## use my local::lib modules
 test -d ~/perl5 && eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)"
@@ -63,7 +60,7 @@ test -d ~/.oh-my-zsh && source ~/.oh-my-zsh/oh-my-zsh.sh
 test -e ~/.alias && source ~/.alias
 test -e ~/.zshfunc && source ~/.zshfunc
 
-if ($SSH_TTY); then
+if [ "$SSH_TTY" ]; then
     # I have ssh'd to another host.
     export EDITOR='vim'
     export VISUAL='vim'
