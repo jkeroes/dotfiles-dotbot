@@ -16,7 +16,8 @@ plugins+=(cpanm jira jsontools)
 plugins+=(docker docker-compose vagrant)
 
 # remote
-plugins+=(ssh-agent mosh tmux tmuxinator)
+plugins+=(ssh-agent mosh tmux)
+
 zstyle :omz:plugins:ssh-agent agent-forwarding on
 zstyle :omz:plugins:ssh-agent identities id_dh_rsa id_dh_ed id_github_ed id_home_ed id_home_rsa id_ms_ed
 
@@ -24,6 +25,7 @@ zstyle :omz:plugins:ssh-agent identities id_dh_rsa id_dh_ed id_github_ed id_home
 # plugins+=(python pip pep8)
 # plugins+=(ruby rbenv rake)
 # plugins+=(hub)
+# plugins+=(tmuxinator)
 
 # Requires install:
 # git clone https://github.com/zdharma/fast-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fast-syntax-highlighting
