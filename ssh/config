@@ -22,7 +22,7 @@ Host beanie bumpo plotz porky rita runt skippy slappy snowball yakko snafu tarfu
 
 Host git.newdream.net
     HostName git.newdream.net
-    KexAlgorithms +diffie-hellman-group1-sha1
+    # KexAlgorithms +diffie-hellman-group1-sha1
     IdentityFile ~/.ssh/id_dh_ed
     Port 29418
 
