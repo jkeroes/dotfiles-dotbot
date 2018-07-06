@@ -33,6 +33,8 @@ plugins+=(fast-syntax-highlighting)
 # git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 plugins+=(zsh-autosuggestions)
 
+# eg ssh-add ~/.ssh/id^*pub
+setopt extendedglob
 
 # @work
 test -d /ndn/etc && source /ndn/etc/ndnperl.rc \

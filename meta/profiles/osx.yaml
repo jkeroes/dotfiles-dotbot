@@ -2,6 +2,9 @@
     link:
       relink: true
 
+- shell:
+    - [echo "Executing osx.yaml"]
+
 - link:
     ~/bin:
         path: bin-home
