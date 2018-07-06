@@ -3,6 +3,7 @@ ssh/id*
 ssh/old
 ssh/authorized_keys
 ssh/known_hosts
+ssh/env*
 ssh/agent*
 vim/.netrwhist
 vim/plugged
