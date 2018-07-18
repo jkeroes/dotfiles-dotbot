@@ -4,7 +4,9 @@
 plugins+=(common-aliases command-not-found cp gnu-utils sudo systemd)
 
 # osx
-plugins+=(osx sublime)
+if [[ $OSTYPE == darwin* ]]; then
+    plugins+=(osx sublime)
+fi
 
 # git
 plugins+=(git git-extras gitignore git-remote-branch tig branch)
@@ -35,8 +37,11 @@ plugins+=(fast-syntax-highlighting)
 # git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 plugins+=(zsh-autosuggestions)
 
-# eg ssh-add ~/.ssh/id^*pub
+# eg `ssh-add ~/.ssh/id^*pub`
 setopt extendedglob
+
+# permit eg `git show HEAD^`
+unsetopt nomatch
 
 # @work
 test -d /ndn/etc && source /ndn/etc/ndnperl.rc \
