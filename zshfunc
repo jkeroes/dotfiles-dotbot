@@ -37,6 +37,10 @@ gria() {
     fi
 }
 
+mr() {
+    lab 'merge_requests?author_name=Keroes&state=opened' | jq -r '.[] | [.web_url,"[\(.source_branch)]",.title] | join(" - ")'
+}
+
 ## System aliases
 
 syslocate() { locate $* | grep -vE '^/home|^/root' }
