@@ -43,10 +43,6 @@ setopt extendedglob
 # permit eg `git show HEAD^`
 unsetopt nomatch
 
-# @work
-test -d /ndn/etc && source /ndn/etc/ndnperl.rc \
-    && test -d /opt/ndn-perl/jkeroes && ndnperl user
-
 ## use my local::lib modules
 test -d ~/perl5 && eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)"
 
@@ -58,9 +54,6 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 	&& [ -s $BASE16_SHELL/profile_helper.sh ] \
 	&& eval "$($BASE16_SHELL/profile_helper.sh)" \
 	&& source "$BASE16_SHELL/scripts/base16-onedark.sh"
-
-# @work, $lastdir would be better but most of the time, this is good enough
-test -d /ndn && cd ~/ndn
 
 # oh-my-zsh
 test -d ~/.oh-my-zsh && source ~/.oh-my-zsh/oh-my-zsh.sh

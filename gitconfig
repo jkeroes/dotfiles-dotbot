@@ -10,7 +10,7 @@
 # Global Config
 [user]
     name = "Joshua Keroes"
-    email = "joshua.keroes@dreamhost.com"
+    email = "joshua@keroes.com"
     #signingkey = **Your GPG ID**
 
 [branch "master"]
@@ -182,43 +182,6 @@
     uncommit  = reset --mixed HEAD~
     amend     = commit --amend
     nevermind = !git reset --hard HEAD && git clean -d -f
-
-    # gerrit review
-    #
-    # git review [branch_for_review]
-    # interface to pushing refs for review to Gerrit
-    # defaults to the tracked remote branch
-    # if the current branch is not tracking anything
-    # then defaults to master
-    review = "!review() {\
-        merge=$1;\
-        [ -z $merge ] && {\
-            branch=$(git for-each-ref --format='%(refname:short)' $(git symbolic-ref HEAD));\
-            merge=$(git config --get branch.$branch.merge | cut -d/ -f3-);\
-        };\
-        [ -z $merge ] && merge=master;\
-        git push origin HEAD:refs/for/$merge;\
-    };\
-    review"
-
-    # gerrit verbose review
-    #
-    # git vreview [branch_for_review]
-    # interface to pushing refs for review to Gerrit
-    # defaults to the tracked remote branch
-    # if the current branch is not tracking anything
-    # then defaults to master
-    vreview = "!review() {\
-        set -x;\
-        merge=$1;\
-        [ -z $merge ] && {\
-            branch=$(git for-each-ref --format='%(refname:short)' $(git symbolic-ref HEAD));\
-            merge=$(git config --get branch.$branch.merge | cut -d/ -f3-);\
-        };\
-        [ -z $merge ] && merge=master;\
-        git push origin HEAD:refs/for/$merge;\
-    };\
-review"
 
     # aliases
     alias = config --get-regexp ^alias\\.

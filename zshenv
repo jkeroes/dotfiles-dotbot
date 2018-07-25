@@ -15,12 +15,6 @@ unsetopt GLOBAL_RCS
 # Add paths if they exist
 path=(
     $HOME/bin
-    ~/ndn/dh/bin
-    ~/ndn/dh/sbin
-    ~/ndn/bin
-    /dh/bin
-    /ndn/dh/bin
-    /ndn/bin
     /usr/local/bin
     /usr/bin
     /usr/local/sbin
@@ -30,17 +24,8 @@ path=(
 )
 path=($^path(N))
 
-# Type "-I~/ndn/perl" for me:
-export PERL5LIB=~/ndn/perl/
-
-# For developing templates
-export DH_TEMPLATE_PREFIX=~/ndn/
-
-# For sctl aliases in .alias
-export DEV_ENV="/usr/bin/env DH_TEMPLATE_PREFIX=${HOME}/ndn PERL5LIB=${HOME}/ndn/perl"
-
 # Seemed to be missing?
-export TMPDIR=/tmp
+# export TMPDIR=/tmp
 
 # Golang
 # export GOPATH=$HOME/go
@@ -68,16 +53,16 @@ if [ -d $HOME/.oh-my-zsh ]; then
     export SPACESHIP_USER_SHOW=always # TODO: Install spaceship on all hosts then delete this line.
     export SPACESHIP_HOST_SHOW=always # TODO: ditto.
 
-    # change: "jkeroes in ndn at icarus"
-    #     to: "jkeroes@icarus:ndn"
+    # change: "jkeroes in somedir at icarus"
+    #     to: "jkeroes@icarus:somedir"
     unset SPACESHIP_USER_PREFIX
     export SPACESHIP_USER_SUFFIX=""
     export SPACESHIP_HOST_PREFIX="@"
     export SPACESHIP_HOST_SUFFIX=""
     export SPACESHIP_DIR_PREFIX=":"
 
-    # change: "on  DPSP-123"
-    #     to:   "  DPSP-123"
+    # change: "on  PROJ-123"
+    #     to:   "  PROJ-123"
     export SPACESHIP_GIT_PREFIX=" "
     export SPACESHIP_GIT_SUFFIX=""
 
@@ -92,7 +77,7 @@ if [ -d $HOME/.oh-my-zsh ]; then
     export SPACESHIP_EXEC_TIME_PREFIX="⏱ :"
     export SPACESHIP_EXEC_TIME_SUFFIX=" "
 
-    # Just comment a section if you want to disable it.
+    # Comment out sections to disable them.
     #
     # Disabling sections is good; it speeds up the prompt.
     #

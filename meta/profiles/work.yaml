@@ -1,9 +1,0 @@
-- link:
-    ~/bin:
-        path: bin-work
-        relink: true
-        force: true
-    ~/share:
-        path: share-work
-        relink: true
-        force: true

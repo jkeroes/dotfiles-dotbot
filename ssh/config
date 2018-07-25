@@ -11,20 +11,9 @@ Host github github.com
     IdentitiesOnly yes
 
 # These will only work if you fully qualify the domain name.
-Host *.dreamhost.com *.sd.dreamhost.com *.newdream.net
+Host *.dreamhost.com
     IdentityFile ~/.ssh/id_dh_ed
     IdentityFile ~/.ssh/id_dh_rsa
-
-# Shortcut names for dc-asparagus and dc-wtf
-Host beanie bumpo plotz porky rita runt skippy slappy snowball yakko snafu tarfu
-    IdentityFile ~/.ssh/id_dh_ed
-    IdentityFile ~/.ssh/id_dh_rsa
-
-Host git.newdream.net
-    HostName git.newdream.net
-    # KexAlgorithms +diffie-hellman-group1-sha1
-    IdentityFile ~/.ssh/id_dh_ed
-    Port 29418
 
 Host josker16 josker.dreamhosters.com
     Hostname josker16.dreamhosters.com
