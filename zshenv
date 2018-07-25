@@ -28,7 +28,7 @@ path=($^path(N))
 # export TMPDIR=/tmp
 
 # Golang
-# export GOPATH=$HOME/go
+export GOPATH=$HOME/go
 
 # To ensure proper runtime linking with shared libraries in your $HOME, rather
 # than messing around with env. vars perpetually it's easier to set one that
@@ -95,7 +95,7 @@ if [ -d $HOME/.oh-my-zsh ]; then
     # elixir        # Elixir section
     # # xcode       # Xcode section (Disabled)
     # swift         # Swift section
-    # golang        # Go section
+    golang          # Go section
     # php           # PHP section
     # rust          # Rust section
     # haskell       # Haskell Stack section
