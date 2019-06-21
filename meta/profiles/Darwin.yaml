@@ -13,9 +13,13 @@
     ~/.iterm2_shell_integration.zsh:
 
 # Run brew (slow)
+<<<<<<< HEAD:meta/profiles/Darwin.yaml
 # - brewfile:
 #     file: Brewfile
 #     no-upgrade: true
 
 - shell:
     - [type colorls || type ruby && gem install --user-install colorls, Installing colorls]
+- brewfile:
+    file: Brewfile
+    no-upgrade: true

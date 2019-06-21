@@ -1,7 +1,7 @@
 # oh-my-zsh
 
 # unix
-plugins+=(common-aliases command-not-found cp gnu-utils sudo systemd)
+plugins+=(common-aliases command-not-found cp gnu-utils sudo systemd fd)
 
 # osx
 if [[ $OSTYPE == darwin* ]]; then
