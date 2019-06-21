@@ -63,9 +63,9 @@ brew "pcre"
 brew "pkg-config"
 brew "pstree"
 brew "pyenv"
-brew "pyenv-virtualenvwrapper"
-brew "rakudo-star", args: ["with-icu4c", "with-pcre"]
-brew "selenium-server-standalone", restart_service: true
+# brew "pyenv-virtualenvwrapper"
+# brew "rakudo-star", args: ["with-icu4c", "with-pcre"]
+# brew "selenium-server-standalone", restart_service: true
 brew "ssh-copy-id"
 brew "sshguard", restart_service: true
 brew "tig"
