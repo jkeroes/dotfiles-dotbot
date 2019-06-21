@@ -14,6 +14,6 @@
     ~/.iterm2_shell_integration.zsh:
 
 # Run brew (slow)
-# - brewfile:
-#     file: Brewfile
-#     no-upgrade: true
+- brewfile:
+    file: Brewfile
+    no-upgrade: true
