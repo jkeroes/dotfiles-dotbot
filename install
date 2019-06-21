@@ -15,14 +15,40 @@ cd "${BASEDIR}"
 git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
 git submodule update --init --recursive "${DOTBOT_DIR}"
 
-# Always run the index config
+# Run config files in dotbot/meta/profiles/*.yaml.
+# They will be run in this order:
+#
+# 1. index.yaml
+# 2. $OS.yaml (eg Darwin.yaml or Linux.yaml) (must match `uname -s`)
+# 3. $HOSTNAME.yaml (must match `uname -n`)
+
+# 1. Always run the index.yaml.
 "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${INDEX_CONFIG}" "${@}"
 
-# If a machine config exists, run it too.
-HOSTNAME=$(/bin/hostname -s)
+# 2. If a operating system config is present, run that.
+OS=$(uname -s)
+OSCONFIG="${CONFDIR}/${OS}${CONFIG_SUFFIX}"
+
+# dotbot-brewfile grants profiles the ability to use the brewfile plugin code.
+# It's up to the profile to run or not run the [slow] bundle install and updates.
+#
+test -e $OSCONFIG && \
+    "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" \
+        -d "${BASEDIR}" \
+        --plugin-dir dotbot-brewfile \
+        -c "${OSCONFIG}" \
+        "${@}"
+
+# 3. If a hostname config is present, run that.
+HOSTNAME=$(hostname -s)
 HOSTCONFIG="${CONFDIR}/${HOSTNAME}${CONFIG_SUFFIX}"
 
 # dotbot-brewfile grants profiles the ability to use the brewfile plugin code.
 # It's up to the profile to run or not run the [slow] bundle install and updates.
+#
 test -e $HOSTCONFIG && \
-    "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" --plugin-dir dotbot-brewfile -c "${HOSTCONFIG}" "${@}"
+    "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" \
+        -d "${BASEDIR}" \
+        --plugin-dir dotbot-brewfile \
+        -c "${HOSTCONFIG}" \
+        "${@}"

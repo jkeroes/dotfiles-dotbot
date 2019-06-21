@@ -1,0 +1,7 @@
+
+- info: => Executing fiji-wifi.yaml
+- info: => info
+- lowinfo: => lowinfo
+- debug: => debug
+- warning: => warning
+- error: => error

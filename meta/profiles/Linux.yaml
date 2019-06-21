@@ -1,0 +1,13 @@
+- defaults:
+    link:
+      relink: true
+
+- info: => Executing Linux.yaml
+
+- link:
+    ~/bin:
+        path: bin-home
+        force: true
+
+- shell:
+    - [type colorls || type ruby && gem install --user-install colorls, Installing colorls]

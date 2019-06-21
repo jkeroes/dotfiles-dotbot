@@ -2,8 +2,7 @@
     link:
       relink: true
 
-- shell:
-    - [echo "Executing index.yaml"]
+- info: => Executing index.yaml
 
 - clean: ['~', '~/.config']
 

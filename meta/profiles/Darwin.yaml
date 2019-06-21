@@ -2,8 +2,7 @@
     link:
       relink: true
 
-- shell:
-    - [echo "Executing osx.yaml"]
+- info: => Executing Darwin.yaml
 
 - link:
     ~/bin:
@@ -17,3 +16,6 @@
 # - brewfile:
 #     file: Brewfile
 #     no-upgrade: true
+
+- shell:
+    - [type colorls || type ruby && gem install --user-install colorls, Installing colorls]
