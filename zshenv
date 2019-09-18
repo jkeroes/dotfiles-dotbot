@@ -20,6 +20,7 @@ path=(
     /usr/local/sbin
     /usr/sbin
     /usr/local/opt/go/libexec/bin
+    $HOME/Library/Python/3.7/bin
     $path
 )
 path=($^path(N))
