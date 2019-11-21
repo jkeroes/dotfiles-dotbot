@@ -21,9 +21,9 @@
     ~/.tigrc:
 
     # zsh
-    ~/.oh-my-zsh: # dir
-    ~/.oh-my-zsh/custom/themes/spaceship.zsh-theme:
-        path: spaceship-prompt/spaceship.zsh-theme
+    # TODO
+    # ~/.oh-my-zsh/custom/themes/spaceship.zsh-theme:
+    #    path: spaceship-prompt/spaceship.zsh-theme
     ~/.alias:
     ~/.hushlogin:
     ~/.zlogin:

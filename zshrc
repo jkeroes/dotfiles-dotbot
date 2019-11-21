@@ -1,27 +1,29 @@
-# oh-my-zsh
+# zplugin
+test -d ~/.zplugin && source ~/.zplugin/bin/zplugin.zsh
 
-# unix
-plugins+=(common-aliases command-not-found cp gnu-utils sudo systemd fd)
+# TODO
+# # unix
+# plugins+=(common-aliases command-not-found cp gnu-utils sudo systemd fd)
 
-# osx
-if [[ $OSTYPE == darwin* ]]; then
-    plugins+=(osx sublime)
-fi
+# # osx
+# if [[ $OSTYPE == darwin* ]]; then
+#     plugins+=(osx sublime)
+# fi
 
-# git
-plugins+=(git git-extras gitignore git-remote-branch tig branch)
+# # git
+# plugins+=(git git-extras gitignore git-remote-branch tig branch)
 
-# dev
-plugins+=(cpanm jira jsontools)
+# # dev
+# plugins+=(cpanm jira jsontools)
 
-# virt
-plugins+=(docker docker-compose vagrant)
+# # virt
+# plugins+=(docker docker-compose vagrant)
 
-# remote
-plugins+=(ssh-agent mosh tmux)
+# # remote
+# plugins+=(ssh-agent mosh tmux)
 
-zstyle :omz:plugins:ssh-agent agent-forwarding on
-zstyle :omz:plugins:ssh-agent identities id_dh_rsa id_dh_ed id_github_ed id_home_ed id_home_rsa id_ms_ed
+# zstyle :omz:plugins:ssh-agent agent-forwarding on
+# zstyle :omz:plugins:ssh-agent identities id_dh_rsa id_dh_ed id_github_ed id_home_ed id_home_rsa id_ms_ed
 
 # others
 # plugins+=(python pip pep8)
@@ -56,7 +58,7 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 	&& source "$BASE16_SHELL/scripts/base16-onedark.sh"
 
 # oh-my-zsh
-test -d ~/.oh-my-zsh && source ~/.oh-my-zsh/oh-my-zsh.sh
+# test -d ~/.oh-my-zsh && source ~/.oh-my-zsh/oh-my-zsh.sh
 
 # Load aliases and functions
 test -e ~/.alias && source ~/.alias
