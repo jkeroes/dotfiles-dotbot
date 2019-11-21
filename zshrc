@@ -1,5 +1,15 @@
 # zplugin
-test -d ~/.zplugin && source ~/.zplugin/bin/zplugin.zsh
+if (test -d ~/.zplugin)
+then
+    source ~/.zplugin/zplugin.zsh
+    # zplugin self-update
+
+    # Two regular plugins loaded without tracking.
+    zplugin light zsh-users/zsh-autosuggestions
+    zplugin light zdharma/fast-syntax-highlighting
+
+fi
+exit
 
 # TODO
 # # unix
@@ -31,13 +41,6 @@ test -d ~/.zplugin && source ~/.zplugin/bin/zplugin.zsh
 # plugins+=(hub)
 # plugins+=(tmuxinator)
 
-# Requires install:
-# git clone https://github.com/zdharma/fast-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fast-syntax-highlighting
-plugins+=(fast-syntax-highlighting)
-
-# Requires install:
-# git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-plugins+=(zsh-autosuggestions)
 
 # eg `ssh-add ~/.ssh/id^*pub`
 setopt extendedglob
