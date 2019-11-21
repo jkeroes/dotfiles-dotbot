@@ -7,3 +7,6 @@ ssh/env*
 ssh/agent*
 vim/.netrwhist
 vim/plugged
+.DS_Store
+/vim/pack/
+/config/hub
