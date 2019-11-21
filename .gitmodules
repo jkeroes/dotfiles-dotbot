@@ -16,3 +16,6 @@
 [submodule "bin/terminal-colors"]
 	path = bin/terminal-colors
 	url = https://github.com/eikenb/terminal-colors
+[submodule "zplugin"]
+	path = zplugin
+	url = https://github.com/zdharma/zplugin.git
