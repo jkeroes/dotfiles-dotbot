@@ -13,7 +13,6 @@
     ~/.iterm2_shell_integration.zsh:
 
 # Run brew (slow)
-<<<<<<< HEAD:meta/profiles/Darwin.yaml
 # - brewfile:
 #     file: Brewfile
 #     no-upgrade: true
