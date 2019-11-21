@@ -32,6 +32,7 @@
     ~/.zshenv:
     ~/.zshfunc:
     ~/.zshrc:
+    ~/.zplugin:
 
     # perl
     ~/.perltidyrc:
